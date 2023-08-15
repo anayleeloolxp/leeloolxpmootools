@@ -1,6 +1,6 @@
 # Leeloo LXP Mootools Drawer
 
-This plugin is used to add LeelooLXP Mootools Drawer on Moodle.
+This plugin is used to add LeelooLXP Awesome Mootools Drawer on Moodle.
 
 ## License
 
