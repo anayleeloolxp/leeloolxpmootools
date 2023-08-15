@@ -1,0 +1,56 @@
+#local_leeloolxpmootools_button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    /* Other styles for your button. */
+}
+
+/* Style for your drawer */
+.local_leeloolxpmootools_wrapper {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: visible;
+    transition: 0.5s;
+    padding-top: 0;
+}
+
+.local_leeloolxpmootools_wrapper.open {
+    width: 50%;
+    max-width: 615px;
+}
+
+div#local_leeloolxpmootools_wrapper_close {
+    position: absolute;
+    top: -5px;
+    left: -10px;
+    background: black;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 12px;
+}
+
+iframe.leeloolxpmootools_frame {
+    border: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.local_leeloolxpmootools_wrapper.open #local_leeloolxpmootools_wrapper_close{
+    cursor: pointer;
+    display: block;
+}
+
+
+#local_leeloolxpmootools_wrapper_close{
+    cursor: pointer;
+    display: none;
+}
