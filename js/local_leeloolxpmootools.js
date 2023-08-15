@@ -10,17 +10,18 @@ require(['jquery'], function ($) {
 
     $(document).ready(function () {
 
-        let mootoolsleeloourl = atob($('#leeloolxpmootools-js-vars').data('mootoolsleeloourl'));
+        let mootoolsleeloourl = $('#leeloolxpmootools-js-vars').data('mootoolsleeloourl');
+        let mootoolsleeloourldecoded = atob($('#leeloolxpmootools-js-vars').data('mootoolsleeloourl'));
         let mootoolstoken = $('#leeloolxpmootools-js-vars').data('mootoolstoken');
 
-        leeloolxpssourl = 'https://mootools.epicmindarena.com?mootoolsleeloourl='+mootoolsleeloourl+'mootoolstoken='+mootoolstoken;
+        leeloolxpssourl = 'https://mootools.epicmindarena.com?mootoolsleeloourl='+mootoolsleeloourl+'&mootoolstoken='+mootoolstoken;
 
         document.getElementById("local_leeloolxpmootools_frame").innerHTML = '<iframe src="' + leeloolxpssourl + '" class="leeloolxpmootools_frame"></iframe>';
 
         // Define your AJAX function
         function updateClockAjaxRequest() {
             var settings = {
-                "url": mootoolsleeloourl + "/api/attendance/update_clockout_time",
+                "url": mootoolsleeloourldecoded + "/api/attendance/update_clockout_time",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
