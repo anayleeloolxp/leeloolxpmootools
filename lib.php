@@ -45,6 +45,17 @@ function local_leeloolxpmootools_before_footer() {
             $PAGE->requires->js(new moodle_url('/local/leeloolxpmootools/js/local_leeloolxpmootools.js'));
             echo '<button id="local_leeloolxpmootools_button">Open MooTools</button>';
             echo '<div class="local_leeloolxpmootools_wrapper"><div id="local_leeloolxpmootools_wrapper_close">X</div><div id="local_leeloolxpmootools_frame"></div></div>';
+
+            echo '<div class="leeloolxpmootools-modal" style="display:none;">
+                <div class="leeloolxpmootools-modal-content">
+                    <span class="leeloolxpmootools-modal-close">&times;</span>
+                    <p class="leeloolxpmootools-modal-body"></p>
+                </div>
+            </div>';
+
+            echo '<div class="leeloolxpmootools-notification" style="display:none;">
+                <p class="leeloolxpmootools-notification-body"></p>
+            </div>';
         }
     }
 }

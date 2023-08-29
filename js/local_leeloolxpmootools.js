@@ -16,6 +16,36 @@ require(['jquery'], function ($) {
 
         leeloolxpssourl = 'https://mootools.epicmindarena.com?mootoolsleeloourl='+mootoolsleeloourl+'&mootoolstoken='+mootoolstoken;
 
+        window.addEventListener('message', function(event) {
+
+            if (event.origin !== 'https://mootools.epicmindarena.com') return;
+
+            var receivedData = JSON.parse(event.data);
+
+            if (receivedData.style === 'modal') {
+                // Show data in the modal
+                $('.leeloolxpmootools-modal-body').text(JSON.stringify(receivedData, null, 2));
+                $('.leeloolxpmootools-modal').fadeIn();
+            } else if (receivedData.style === 'notification') {
+                // Show data in the notification
+                $('.leeloolxpmootools-notification-body').text(JSON.stringify(receivedData, null, 2));
+                $('.leeloolxpmootools-notification').fadeIn().delay(5000).fadeOut();
+            }
+
+        }, false);
+
+        // Close modal when 'x' is clicked
+        $('.leeloolxpmootools-modal-close').on('click', function() {
+            $('.leeloolxpmootools-modal').fadeOut();
+        });
+
+        // Close modal when clicking outside
+        $(document).on('click', function(event) {
+            if ($(event.target).hasClass('leeloolxpmootools-modal')) {
+                $('.leeloolxpmootools-modal').fadeOut();
+            }
+        });
+
         document.getElementById("local_leeloolxpmootools_frame").innerHTML = '<iframe src="' + leeloolxpssourl + '" class="leeloolxpmootools_frame"></iframe>';
 
         // Define your AJAX function
@@ -30,7 +60,7 @@ require(['jquery'], function ($) {
             };
 
             $.ajax(settings).done(function(response) {
-                console.log(response);
+                // console.log(response);
             });
         }
 
