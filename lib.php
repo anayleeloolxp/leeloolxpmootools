@@ -37,9 +37,57 @@ function local_leeloolxpmootools_before_footer() {
     if ($mootoolsenable && $mootoolsleeloourl && $mootoolstoken) {
         global $USER;
         if (isloggedin() && !is_siteadmin($USER)) {
+
+            $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
+
+            // Detect Browser
+            if (strpos($userAgent, 'firefox') !== false) {
+                $browser = 'Firefox';
+            } elseif (strpos($userAgent, 'chrome') !== false) {
+                $browser = 'Chrome';
+            } elseif (strpos($userAgent, 'safari') !== false) {
+                $browser = 'Safari';
+            } elseif (strpos($userAgent, 'msie') !== false || strpos($userAgent, 'trident') !== false) {
+                $browser = 'Internet Explorer';
+            } else {
+                $browser = 'Other/Unknown';
+            }
+
+            // Detect Operating System
+            if (strpos($userAgent, 'win') !== false) {
+                $os = 'Windows';
+            } elseif (strpos($userAgent, 'mac') !== false) {
+                $os = 'MacOS';
+            } elseif (strpos($userAgent, 'linux') !== false) {
+                $os = 'Linux';
+            } elseif (strpos($userAgent, 'android') !== false) {
+                $os = 'Android';
+            } elseif (strpos($userAgent, 'iphone') !== false) {
+                $os = 'iOS';
+            } else {
+                $os = 'Other/Unknown';
+            }
+
             global $PAGE;
 
-            echo '<div id="leeloolxpmootools-js-vars" data-mootoolsleeloourl="' . base64_encode($mootoolsleeloourl) . '" data-mootoolstoken="' . $mootoolstoken . '"></div>';
+            // Get the context of the current page
+            $context = $PAGE->context;
+
+            // Check if the context level is of a module (activity/resource)
+            if ($context && $context->contextlevel == CONTEXT_MODULE) {
+
+                $cm = get_coursemodule_from_id('', $context->instanceid, 0, false, MUST_EXIST);
+
+                $modname = $cm->modname;
+                $courseId = $cm->course;
+                $arid = $context->instanceid;
+            } else {
+                $arid = 0;
+                $courseId = 0;
+                $modname = '';
+            }
+
+            echo '<div id="leeloolxpmootools-js-vars" data-mootoolsleeloourl="' . base64_encode($mootoolsleeloourl) . '" data-mootoolstoken="' . $mootoolstoken . '" data-arid="' . $arid . '" data-courseid="' . $courseId . '" data-modname="' . $modname . '" data-os="' . $os . '" data-browser="' . $browser . '"></div>';
 
             //$PAGE->requires->css(new moodle_url('/local/leeloolxpmootools/styles.css'));
             $PAGE->requires->js(new moodle_url('/local/leeloolxpmootools/js/local_leeloolxpmootools.js'));

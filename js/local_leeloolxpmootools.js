@@ -14,6 +14,12 @@ require(['jquery'], function ($) {
         let mootoolsleeloourldecoded = atob($('#leeloolxpmootools-js-vars').data('mootoolsleeloourl'));
         let mootoolstoken = $('#leeloolxpmootools-js-vars').data('mootoolstoken');
 
+        let arid = $('#leeloolxpmootools-js-vars').data('arid');
+        let courseid = $('#leeloolxpmootools-js-vars').data('courseid');
+        let modname = $('#leeloolxpmootools-js-vars').data('modname');
+        let os = $('#leeloolxpmootools-js-vars').data('os');
+        let browser = $('#leeloolxpmootools-js-vars').data('browser');
+
         leeloolxpssourl = 'https://mootools.epicmindarena.com?mootoolsleeloourl='+mootoolsleeloourl+'&mootoolstoken='+mootoolstoken;
 
         window.addEventListener('message', function(event) {
@@ -68,7 +74,47 @@ require(['jquery'], function ($) {
         updateClockAjaxRequest();
 
         // Set an interval to call the function every 5 minutes (300000 milliseconds)
-        setInterval(updateClockAjaxRequest, 300000);
+        setInterval(updateClockAjaxRequest, 60000);
+
+        if(arid != 0){
+
+            arTrackAjaxRequest(arid, 'start');
+
+            setInterval( function() {
+                arTrackAjaxRequest(arid, 'update');
+            } , 60000);
+
+            $(window).on('beforeunload', function() {
+                arTrackAjaxRequest(arid, 'stop');
+            });
+        }
+
+        // Define your AJAX function
+        function arTrackAjaxRequest(arid, task) {
+            console.log(task);
+            var settings = {
+                "url": mootoolsleeloourldecoded + "/api/attendance/update_ar_time",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer " + mootoolstoken
+                },
+                "data": {
+                    "instanceid": arid,
+                    "instancetype": 'ar',
+                    "ar_type": modname,
+                    "courseid": courseid,
+                    "os": os,
+                    "browser": browser,
+                    "apifrom": 'Moodle',
+                    "task": task
+                },
+            };
+
+            $.ajax(settings).done(function(response) {
+                // console.log(response);
+            });
+        }
 
     });
 
