@@ -24,6 +24,8 @@ require(['jquery'], function ($) {
 
         window.addEventListener('message', function(event) {
 
+            return;
+
             if (event.origin !== 'https://mootools.epicmindarena.com') return;
 
             var receivedData = JSON.parse(event.data);
@@ -72,6 +74,10 @@ require(['jquery'], function ($) {
 
         // Call the function immediately upon page load
         updateClockAjaxRequest();
+
+        $(window).on('beforeunload', function() {
+            updateClockAjaxRequest();
+        });
 
         // Set an interval to call the function every 5 minutes (300000 milliseconds)
         setInterval(updateClockAjaxRequest, 60000);
