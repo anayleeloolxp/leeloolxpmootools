@@ -18,7 +18,7 @@ class leeloo_admin_setting_configtext extends admin_setting_configtext {
         $curl = new curl;
 
         // The endpoint of the external system you're notifying.
-        $url = 'https://mootools.epicmindarena.com/api/get_install.php';
+        $url = 'https://mootools.epic1academy.com/api/get_install.php';
 
         // Prepare the data payload.
         $payload = array(
