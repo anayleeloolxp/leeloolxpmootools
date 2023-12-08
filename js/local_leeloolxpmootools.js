@@ -15,6 +15,7 @@ require(["jquery"], function ($) {
       $("#leeloolxpmootools-js-vars").data("mootoolsleeloourl")
     );
     let mootoolstoken = $("#leeloolxpmootools-js-vars").data("mootoolstoken");
+    let mootoolsresponse = $("#leeloolxpmootools-js-vars").data("mootoolsloginresponse");
 
     let arid = $("#leeloolxpmootools-js-vars").data("arid");
     let courseid = $("#leeloolxpmootools-js-vars").data("courseid");
@@ -26,7 +27,9 @@ require(["jquery"], function ($) {
       "https://mootools.epic1academy.com?mootoolsleeloourl=" +
       mootoolsleeloourl +
       "&mootoolstoken=" +
-      mootoolstoken;
+      mootoolstoken +
+      "&mootoolsresponse=" +
+      mootoolsresponse;
 
     window.addEventListener(
       "message",

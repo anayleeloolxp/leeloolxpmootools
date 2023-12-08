@@ -30,8 +30,10 @@ function local_leeloolxpmootools_before_footer() {
     $mootoolsenable = get_config('local_leeloolxpmootools')->enable;
     $mootoolsleeloourl = get_config('local_leeloolxpmootools')->leeloourl;
 
-    if (isset($_COOKIE['mootools_token'])) {
-        $mootoolstoken = $_COOKIE['mootools_token'];
+    if (isset($_COOKIE['mootools_login_response'])) {
+        $mootoolsloginresponse = $_COOKIE['mootools_login_response'];
+        $mootoolsloginresponsearr = json_decode($mootoolsloginresponse);
+        $mootoolstoken = $mootoolsloginresponsearr->token;
     }
 
     if ($mootoolsenable && $mootoolsleeloourl && $mootoolstoken) {
@@ -87,7 +89,7 @@ function local_leeloolxpmootools_before_footer() {
                 $modname = '';
             }
 
-            echo '<div id="leeloolxpmootools-js-vars" data-mootoolsleeloourl="' . base64_encode($mootoolsleeloourl) . '" data-mootoolstoken="' . $mootoolstoken . '" data-arid="' . $arid . '" data-courseid="' . $courseId . '" data-modname="' . $modname . '" data-os="' . $os . '" data-browser="' . $browser . '"></div>';
+            echo '<div id="leeloolxpmootools-js-vars" data-mootoolsleeloourl="' . base64_encode($mootoolsleeloourl) . '" data-mootoolstoken="' . $mootoolstoken . '" data-arid="' . $arid . '" data-courseid="' . $courseId . '" data-modname="' . $modname . '" data-os="' . $os . '" data-browser="' . $browser . '" data-mootoolsloginresponse="' . base64_encode($mootoolsloginresponse) . '"></div>';
 
             //$PAGE->requires->css(new moodle_url('/local/leeloolxpmootools/styles.css'));
             $PAGE->requires->js(new moodle_url('/local/leeloolxpmootools/js/local_leeloolxpmootools.js'));

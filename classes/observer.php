@@ -82,14 +82,18 @@ class observer {
                 if ($res_arr->status == 'success') {
                     $mootools_token = $res_arr->token;
                     setcookie('mootools_token', $mootools_token, time() + (86400 * 30), '/');
+                    setcookie('mootools_login_response', $result, time() + (86400 * 30), '/');
                 } else {
                     setcookie('mootools_token', '', time() - 3600, '/');
+                    setcookie('mootools_login_response', '', time() - 3600, '/');
                 }
             } else {
                 setcookie('mootools_token', '', time() - 3600, '/');
+                setcookie('mootools_login_response', '', time() - 3600, '/');
             }
         } else {
             setcookie('mootools_token', '', time() - 3600, '/');
+            setcookie('mootools_login_response', '', time() - 3600, '/');
         }
     }
 
@@ -130,6 +134,7 @@ class observer {
 
                 // Delete the cookie
                 setcookie('mootools_token', '', time() - 3600, '/');  // This sets the cookie to expire in the past, effectively deleting it
+                setcookie('mootools_login_response', '', time() - 3600, '/');
             }
         }
     }
